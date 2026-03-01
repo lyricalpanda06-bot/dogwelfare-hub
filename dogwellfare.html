@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dog Welfare Hub</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family: "Georgia", serif;
+    background-color: aliceblue;
+    color: darkslategray;
+    overflow:hidden;
+}
+
+
+.slide{
+    width:100%;
+    height:100vh;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
+    box-sizing:border-box;
+}
+
+.active{
+    display:flex;
+}
+
+
+.header{
+    background-color: white;
+    border-left:20px solid navy;
+    border-right:20px solid navy;
+}
+
+.header h1{
+    font-size:48px;
+    margin-bottom:10px;
+    letter-spacing:2px;
+}
+
+.header p{
+    max-width:600px;
+    font-size:18px;
+    line-height:1.6;
+}
+
+button{
+    padding:12px 30px;
+    font-size:16px;
+    border:none;
+    border-radius:25px;
+    background-color: seagreen;
+    color:white;
+    cursor:pointer;
+    margin-top:20px;
+    transition:transform 0.3s, background-color 0.3s;
+}
+
+button:hover{
+    background-color: darkgreen;
+    transform:scale(1.05);
+}
+
+.form-slide{
+    background-color: honeydew;
+}
+
+.select-box{
+    margin:15px;
+}
+
+select{
+    padding:10px;
+    font-size:16px;
+    border-radius:10px;
+    border:2px solid darkgreen;
+}
+
+.result-slide{
+    background-color: white;
+    border-top:15px solid steelblue;
+    border-bottom:15px solid steelblue;
+}
+
+.info-box{
+    max-width:800px;
+    background-color: lavender;
+    padding:20px;
+    border-radius:20px;
+    line-height:1.6;
+    animation:fadeIn 1s;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+footer{
+    position:absolute;
+    bottom:10px;
+    font-size:14px;
+    color: gray;
+}
+</style>
+</head>
+
+<body>
+
+<div class="slide header active" id="slide1">
+    <h1>Dog Welfare Hub</h1>
+    <p>
+        Dog Welfare Hub is an informative platform created to help humans
+        understand dogs better. It provides breed-based guidance, age-specific
+        care, emotional understanding, and health precautions to ensure dogs
+        live a safe, happy, and healthy life.
+    </p>
+    <button onclick="nextSlide(2)">Go</button>
+</div>
+
+<div class="slide form-slide" id="slide2">
+    <h2>Select Dog Details</h2>
+
+    <div class="select-box">
+        <label>Dog Breed</label><br>
+        <select id="breed">
+            <option>Labrador Retriever</option>
+            <option>German Shepherd</option>
+            <option>Golden Retriever</option>
+            <option>Pug</option>
+            <option>Beagle</option>
+            <option>Rottweiler</option>
+        </select>
+    </div>
+
+    <div class="select-box">
+        <label>Age</label><br>
+        <select id="age">
+            <option>Puppy (0–1 year)</option>
+            <option>Adult (1–7 years)</option>
+            <option>Senior (7+ years)</option>
+        </select>
+    </div>
+
+    <div class="select-box">
+        <label>Gender</label><br>
+        <select id="gender">
+            <option>Male</option>
+            <option>Female</option>
+        </select>
+    </div>
+
+    <button onclick="showResult()">Search</button>
+</div>
+
+
+<div class="slide result-slide" id="slide3">
+    <h2>Dog Information</h2>
+    <div class="info-box" id="dogInfo"></div>
+    <button onclick="nextSlide(2)">Back</button>
+    <footer>© Dog Welfare Hub | Pet Care Awareness</footer>
+</div>
+
+<script>
+function nextSlide(num){
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+    document.getElementById('slide'+num).classList.add('active');
+}
+
+function showResult(){
+    let breed = document.getElementById("breed").value;
+    let age = document.getElementById("age").value;
+    let gender = document.getElementById("gender").value;
+
+    let info = "";
+
+    if(breed === "Labrador Retriever"){
+        info = "Labradors are friendly, intelligent, and very social dogs. They love human interaction and require daily exercise. Labradors are excellent family pets and respond well to training. They enjoy swimming and outdoor activities. Proper diet control is important as they gain weight easily.";
+    }
+    else if(breed === "German Shepherd"){
+        info = "German Shepherds are loyal, brave, and highly protective dogs. They are known for intelligence and obedience. Regular training and mental stimulation are essential. They form strong bonds with owners and require firm but loving care.";
+    }
+    else if(breed === "Golden Retriever"){
+        info = "Golden Retrievers are gentle, affectionate, and patient dogs. They are excellent with children and seniors. They need regular grooming and physical activity. Goldens are emotionally sensitive and thrive on love and attention.";
+    }
+    else if(breed === "Pug"){
+        info = "Pugs are small, affectionate, and playful dogs. They love indoor living and human companionship. Due to breathing issues, heavy exercise should be avoided. They need proper weight management and climate care.";
+    }
+    else if(breed === "Beagle"){
+        info = "Beagles are curious, energetic, and friendly dogs. They have a strong sense of smell and love exploring. Beagles need regular walks and mental stimulation. They are vocal and express emotions clearly.";
+    }
+    else if(breed === "Rottweiler"){
+        info = "Rottweilers are strong, confident, and protective dogs. With proper training, they are calm and loving family members. Early socialization is important. They require structured routines and responsible handling.";
+    }
+
+    document.getElementById("dogInfo").innerHTML =
+        "<b>Breed:</b> " + breed + "<br>" +
+        "<b>Age:</b> " + age + "<br>" +
+        "<b>Gender:</b> " + gender + "<br><br>" +
+        info;
+
+   
+}
+</script>
+
+</body>
+</html>
